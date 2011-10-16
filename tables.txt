@@ -1,3 +1,6 @@
+// Table für Kellner
+//------------------------
+
 CREATE TABLE IF NOT EXISTS Waiter (
   `WID` INT(11) NOT NULL AUTO_INCREMENT,
   `WFirstname` VARCHAR(255) NOT NULL,
