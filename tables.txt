@@ -2,9 +2,40 @@
 //------------------------
 
 CREATE TABLE IF NOT EXISTS Waiter (
-  `WID` INT(11) NOT NULL AUTO_INCREMENT,
-  `WFirstname` VARCHAR(255) NOT NULL,
-  `WLastname` VARCHAR(255) NOT NULL,
-  `WAdress` VARCHAR(255) NOT NULL,
-  `WCity` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`WID`))
+  `WID` INT(5) NOT NULL AUTO_INCREMENT,
+  `WFirstname` VARCHAR(250) NOT NULL,
+  `WLastname` VARCHAR(250) NOT NULL,
+  `WAdress` VARCHAR(250) NOT NULL,
+  `WCity` VARCHAR(250) NOT NULL,
+  PRIMARY KEY (`WID`)
+)
+  
+// Table für Tische
+//------------------------
+
+CREATE TABLE IF NOT EXISTS `Tables` (
+  `TID` int(5) NOT NULL AUTO_INCREMENT,
+  `TSmoker` tinyint(1) NOT NULL,
+  PRIMARY KEY (`TID`)
+)
+
+
+// Table für Burger
+//------------------------
+
+CREATE TABLE IF NOT EXISTS `Burger` (
+  `BID` int(5) NOT NULL AUTO_INCREMENT,
+  `BName` varchar(250) NOT NULL,
+  `BPrice` int(11) NOT NULL,
+  PRIMARY KEY (`BID`)
+) 
+
+// Table für Beilagen
+//------------------------
+
+CREATE TABLE IF NOT EXISTS `Sidedishes` (
+  `SID` int(5) NOT NULL AUTO_INCREMENT,
+  `SName` varchar(250) NOT NULL,
+  `SPrice` int(8) NOT NULL,
+  PRIMARY KEY (`SID`)
+)
