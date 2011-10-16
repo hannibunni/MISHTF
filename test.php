@@ -11,10 +11,10 @@
     </form>
     
     
-    Dein Name ist: 
     <?php
         $name = $_GET["thebox"];
-        echo "$name";
+        if (strcmp($name, "") != 0)
+            echo "Dein Name ist: $name";
     ?>
     
 </html>
