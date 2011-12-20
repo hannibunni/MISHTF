@@ -63,11 +63,9 @@ which got served to this table by your chosen waiter <br>
         $result = mysql_query("select BName from Burger where BID in 
                                     (select BID from Serve where WID = $wid and TID = $tid)");
         
-        echo ("To the table number $tid our waiter $name->WFirstName 
-               $name->WLastName served ");
-
         while ($burger = mysql_fetch_array($result)) {
-            echo $burger["BName"] . " | ";
+            echo $burger["BName"] . " at table " . $tid . " by " 
+                    . $name->WFirstName . " " . $name->WLastName; ?><br><?php
         } 
 
     }
