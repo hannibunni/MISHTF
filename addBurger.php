@@ -1,14 +1,9 @@
-
 <?php
-$username = "root";
-$password = "";
-$hostname = "localhost";
-$dbh = mysql_connect($hostname, $username, $password)
-	or die("Unable to connect to MySQL");
-print "Connected to MySQL<br>";
+    include('sqlConnection.php');
+    $connection = new sqlConnection;
 ?>
 
-<form action="addBurger.php" method="get">
+<form action="addBurger.php" method="POST">
 
     What Burger you want to add? <br>
     name:
@@ -20,23 +15,19 @@ print "Connected to MySQL<br>";
 </form>
 
 <?php
-    
-    $bName = $_GET["bName"];
-    $bPrice = $_GET["bPrice"];
-    
-    if(strcmp($bName, "") && strcmp($bPrice, "")) {
-        
-        $myArray = array (
-            'name' => "$bName",
-            'price' => "$bPrice"
-        );
-        
-        $query = "INSERT INTO `teest`.`burger` (`id`, `name`, `price`) VALUES (NULL, '$bName', '$bPrice');";
-        mysql_query($query) or die (mysql_error());
-        
-        echo "You just fucking added a Burger called $myArray[name] for $myArray[price]";
-        
-        mysql_close($dbh);
-    }
 
+    if (isset ($_POST["bName"]) && $_POST["bPrice"]) {
+        
+        $bName = $_POST["bName"];
+        $bPrice = $_POST["bPrice"];
+        $query = "INSERT INTO `BURGER_HOUSE`.`Burger` (`BID`, `BName`, `BPrice`)
+                  VALUES (NULL, '$bName', '$bPrice');";
+        
+        mysql_query($query) or die (mysql_error());
+        echo ("Burger $bName has been added to database");
+    }
 ?>
+
+<form method="link" action="index.html">
+<input type="submit" value="Back to Main">
+</form>
