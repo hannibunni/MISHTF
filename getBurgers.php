@@ -15,12 +15,16 @@ which got served to this table by your chosen waiter <br>
 ?>
 
 <select name="waiter">
-    <option>-</option>
     <?php
-    
         while($waiter = mysql_fetch_array($waiters)) {
-            echo '<option value="' . $waiter["WID"] . '">' .
-                  $waiter["WLastName"] . ", " . $waiter["WFirstName"] . '</option>';
+            if ($_POST["waiter"] == $waiter["WID"]) {
+                echo '<option selected = yes value="' . $waiter["WID"] . '">' .
+                    $waiter["WLastName"] . ", " . $waiter["WFirstName"] . '</option>';
+            }
+            else {
+                echo '<option value="' . $waiter["WID"] . '">' .
+                    $waiter["WLastName"] . ", " . $waiter["WFirstName"] . '</option>';
+            }
         }
     
     ?>
@@ -28,12 +32,18 @@ which got served to this table by your chosen waiter <br>
     
 </select>
 <select name="table">
-    <option>-</option>
     <?php
     
         while($table = mysql_fetch_array($tables)) {
-            echo '<option value="' . $table["TID"] . '">' . "Table Number: " .
-                  $table["TID"] . '</option>';
+            if ($_POST["table"] == $table["WID"]) {
+                echo '<option selected = yes value="' . $table["TID"] . '">' . "Table Number: " .
+                    $table["TID"] . '</option>';
+            }
+            else {
+                echo '<option value="' . $table["TID"] . '">' . "Table Number: " .
+                    $table["TID"] . '</option>'; 
+            }
+            
         }
     
     ?>
@@ -47,7 +57,6 @@ which got served to this table by your chosen waiter <br>
     if (isset ($_POST["waiter"]) && isset ($_POST["table"])) {
         $wid = $_POST["waiter"];
         $tid = $_POST["table"];
-        
         $waiter = mysql_query("select * from Waiter where WID = $wid");
         $name = mysql_fetch_object($waiter); 
         
@@ -56,10 +65,11 @@ which got served to this table by your chosen waiter <br>
         
         echo ("To the table number $tid our waiter $name->WFirstName 
                $name->WLastName served ");
-        
+
         while ($burger = mysql_fetch_array($result)) {
             echo $burger["BName"] . " | ";
-        }
+        } 
+
     }
 
 ?>
