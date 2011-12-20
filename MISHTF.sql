@@ -6,10 +6,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Datenbank: `HOUSE_OF_BURGER`
+-- Datenbank: `BEST_BURGERS`
 --
-CREATE DATABASE `HOUSE_OF_BURGER` DEFAULT CHARACTER SET latin1;
-USE `HOUSE_OF_BURGER`;
+CREATE DATABASE `BEST_BURGERS` DEFAULT CHARACTER SET latin1;
+USE `BEST_BURGERS`;
 
 -- --------------------------------------------------------
 
@@ -20,7 +20,7 @@ USE `HOUSE_OF_BURGER`;
 CREATE TABLE IF NOT EXISTS `Burger` (
   `BID`    int(5) unsigned NOT NULL AUTO_INCREMENT,
   `BName`  varchar(25) NOT NULL,
-  `BPrice` float(10,2) NOT NULL,
+  `BPrice` float(4,2) NOT NULL,
   PRIMARY KEY (`BID`)
 );
 
@@ -32,6 +32,12 @@ INSERT INTO `Burger` (`BName`, `BPrice`) VALUES
   ('Manhattan Burger', 6);
 INSERT INTO `Burger` (`BName`, `BPrice`) VALUES
   ('NewYork Classic', 6.5);
+INSERT INTO `Burger` (`BName`, `BPrice`) VALUES
+  ('Extra Meat Burger', 8);
+INSERT INTO `Burger` (`BName`, `BPrice`) VALUES
+  ('Hot Chicken Burger', 7.25);
+INSERT INTO `Burger` (`BName`, `BPrice`) VALUES
+  ('Austrian Burger', 7.5);
 
 -- --------------------------------------------------------
 
@@ -40,18 +46,47 @@ INSERT INTO `Burger` (`BName`, `BPrice`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Serve` (
-  `SID`   int(100) unsigned NOT NULL AUTO_INCREMENT,
-  `WID`   int(5) unsigned NOT NULL,
-  `TID`   int(5) unsigned NOT NULL,
-  `BID`   int(5) unsigned NOT NULL,
-  `SDate` date NOT NULL,
-  PRIMARY KEY (`SID`)
+  `ID`        int(100) unsigned NOT NULL AUTO_INCREMENT,
+  `WID`        int(5) unsigned NOT NULL,
+  `TID`        int(5) unsigned NOT NULL,
+  `BID`        int(5) unsigned,
+  `SID`        int(5) unsigned,
+  `STimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`)
 );
 
 --
 -- Daten für Tabelle `Serve`
 --
 
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+  (1, 5, 1, 1);
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+  (1, 6, 2, 2);
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+  (1, 7, 3, 3);
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+  (1, 5, 0, 2, '2010-11-18 12:00:30');
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+  (1, 6, 1, 3);
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+  (1, 7, 3, 1);
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+  (2, 3, 5, 2, '2009-08-10 10:04:30');
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+  (2, 4, 3, 1);
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+  (2, 4, 1, 3, '2011-04-03 16:00:42');
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+  (3, 2, 2, 2, '2008-06-05 14:05:42');
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+  (3, 2, 1, 4);
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+  (4, 1, 4, 3);
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+  (4, 1, 2, 4);
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+  (4, 1, 5, 2, '2010-09-14 17:00:51');
 
 -- --------------------------------------------------------
 
@@ -62,8 +97,8 @@ CREATE TABLE IF NOT EXISTS `Serve` (
 CREATE TABLE IF NOT EXISTS `SideDishes` (
   `SID`         int(5) unsigned NOT NULL AUTO_INCREMENT,
   `SName`       varchar(15) NOT NULL,
-  `SPrice`      int(2) unsigned NOT NULL,
-  `SGlutenFree` tinyint(1) NOT NULL,
+  `SPrice`      float(4,2) NOT NULL,
+  `SGlutenFree` tinyint(1) NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`SID`)
 );
 
@@ -71,6 +106,14 @@ CREATE TABLE IF NOT EXISTS `SideDishes` (
 -- Daten für Tabelle `SideDishes`
 --
 
+INSERT INTO `SideDishes` (`SName`, `SPrice`, `SGlutenFree`) VALUES
+  ('Pommes', 2.5, true);
+INSERT INTO `SideDishes` (`SName`, `SPrice`) VALUES
+  ('Potatoes', 2);
+INSERT INTO `SideDishes` (`SName`, `SPrice`) VALUES
+  ('Potato Stripes', 2.7);
+INSERT INTO `SideDishes` (`SName`, `SPrice`, `SGlutenFree`) VALUES
+  ('Rice', 2, true);
 
 -- --------------------------------------------------------
 
@@ -80,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `SideDishes` (
 
 CREATE TABLE IF NOT EXISTS `Table` (
   `TID`      int(5) unsigned NOT NULL AUTO_INCREMENT,
-  `TSmoker`  tinyint(1) NOT NULL,
+  `TSmoker`  tinyint(1) NOT NULL DEFAULT FALSE,
   `TSeats`   int(2) unsigned NOT NULL,
   PRIMARY KEY (`TID`)
 );
@@ -89,6 +132,23 @@ CREATE TABLE IF NOT EXISTS `Table` (
 -- Daten für Tabelle `Table`
 --
 
+-- NonSmoking Tables
+INSERT INTO `Table` (`TSeats`) VALUES
+  (4);
+INSERT INTO `Table` (`TSeats`) VALUES
+  (4);
+INSERT INTO `Table` (`TSeats`) VALUES
+  (2);
+INSERT INTO `Table` (`TSeats`) VALUES
+  (5);
+
+-- Smoking Tables
+INSERT INTO `Table` (`TSmoker`, `TSeats`) VALUES
+  (true, 4);
+INSERT INTO `Table` (`TSmoker`, `TSeats`) VALUES
+  (true, 2);
+INSERT INTO `Table` (`TSmoker`, `TSeats`) VALUES
+  (true, 5);
 
 -- --------------------------------------------------------
 
@@ -110,3 +170,11 @@ CREATE TABLE IF NOT EXISTS `Waiter` (
 -- Daten für Tabelle `Waiter`
 --
 
+INSERT INTO `Waiter` (`WFirstName`, `WLastName`, `WAddress`, `WAge`, `WGender`) VALUES
+  ('Daniel', 'Fritzsch', 'Daniels Address', 20, 'male'); 
+INSERT INTO `Waiter` (`WFirstName`, `WLastName`, `WAddress`, `WAge`, `WGender`) VALUES 
+  ('Hannes', 'Hasenauer', 'Hannes Address', 23, 'male');
+INSERT INTO `Waiter` (`WFirstName`, `WLastName`, `WAddress`, `WAge`, `WGender`) VALUES
+  ('Hans Christian', 'Temmel', 'Hans Christians Address', 25, 'male');
+INSERT INTO `Waiter` (`WFirstName`, `WLastName`, `WAddress`, `WAge`, `WGender`) VALUES
+  ('Sandra', 'Steal', 'Sandras Address', 15, 'female'); 
