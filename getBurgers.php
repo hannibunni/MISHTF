@@ -9,8 +9,8 @@ which got served to this table by your chosen waiter <br>
 
 <?php
     
-    $waiters = mysql_query("select * from BURGER_HOUSE.Waiter") or die(mysql_error());
-    $tables = mysql_query("select * from BURGER_HOUSE.Table") or die(mysql_error());
+    $waiters = mysql_query("select * from `Waiter`") or die(mysql_error());
+    $tables = mysql_query("SELECT * FROM `Table`") or die(mysql_error());
     
 ?>
 
@@ -47,19 +47,19 @@ which got served to this table by your chosen waiter <br>
     if (isset ($_POST["waiter"]) && isset ($_POST["table"])) {
         $wid = $_POST["waiter"];
         $tid = $_POST["table"];
-        $waiter = mysql_query("select * from BURGER_HOUSE.Waiter where WID = wid");
-        $name = mysql_fetch_object($waiter);
-        $table = $_POST["table"];
-        $burgers = mysql_query("select * from BURGER_HOUSE.Serve where TID = $tid and WID = $wid");
         
+        $waiter = mysql_query("select * from Waiter where WID = $wid");
+        $name = mysql_fetch_object($waiter); 
         
-        echo ("To the table number $table our waiter $name->WFirstName 
+        $result = mysql_query("select BName from Burger where BID in 
+                                    (select BID from Serve where WID = $wid and TID = $tid)");
+        
+        echo ("To the table number $tid our waiter $name->WFirstName 
                $name->WLastName served ");
         
-        while ($burger = mysql_fetch_array($burgers)) {
-            $temp = mysql_query("select BName from BURGER_HOUSE.Burger where BID = $burger");
-            echo $temp;
-        }      
+        while ($burger = mysql_fetch_array($result)) {
+            echo $burger["BName"] . " | ";
+        }
     }
 
 ?>

@@ -20,7 +20,7 @@
         
         $bName = $_POST["bName"];
         $bPrice = $_POST["bPrice"];
-        $query = "INSERT INTO `BURGER_HOUSE`.`Burger` (`BID`, `BName`, `BPrice`)
+        $query = "INSERT INTO `Burger` (`BID`, `BName`, `BPrice`)
                   VALUES (NULL, '$bName', '$bPrice');";
         
         mysql_query($query) or die (mysql_error());
