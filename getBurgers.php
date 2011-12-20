@@ -15,7 +15,7 @@ which got served to this table by your chosen waiter <br>
 ?>
 
 <select name="waiter">
-    
+    <option>-</option>
     <?php
     
         while($waiter = mysql_fetch_array($waiters)) {
@@ -28,7 +28,7 @@ which got served to this table by your chosen waiter <br>
     
 </select>
 <select name="table">
-    
+    <option>-</option>
     <?php
     
         while($table = mysql_fetch_array($tables)) {
