@@ -45,12 +45,21 @@ which got served to this table by your chosen waiter <br>
 <?php
 
     if (isset ($_POST["waiter"]) && isset ($_POST["table"])) {
-        $waiter = mysql_query("select * from BURGER_HOUSE.Waiter where WID = 1");
+        $wid = $_POST["waiter"];
+        $tid = $_POST["table"];
+        $waiter = mysql_query("select * from BURGER_HOUSE.Waiter where WID = wid");
         $name = mysql_fetch_object($waiter);
-        
         $table = $_POST["table"];
+        $burgers = mysql_query("select * from BURGER_HOUSE.Serve where TID = $tid and WID = $wid");
+        
+        
         echo ("To the table number $table our waiter $name->WFirstName 
-               $name->WLastName served blabla Burgers");
+               $name->WLastName served ");
+        
+        while ($burger = mysql_fetch_array($burgers)) {
+            $temp = mysql_query("select BName from BURGER_HOUSE.Burger where BID = $burger");
+            echo $temp;
+        }      
     }
 
 ?>
