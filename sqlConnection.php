@@ -3,7 +3,7 @@
     class sqlConnection {
         
         function __construct() {
-            $dbname = "HOUSE_OF_BURGER";
+            $dbname = "BEST_BURGERS";
             $username = "root";
             $password = "";
             $hostname = "localhost";

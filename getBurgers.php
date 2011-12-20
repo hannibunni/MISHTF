@@ -35,7 +35,7 @@ which got served to this table by your chosen waiter <br>
     <?php
     
         while($table = mysql_fetch_array($tables)) {
-            if ($_POST["table"] == $table["WID"]) {
+            if ($_POST["table"] == $table["TID"]) {
                 echo '<option selected = yes value="' . $table["TID"] . '">' . "Table Number: " .
                     $table["TID"] . '</option>';
             }
