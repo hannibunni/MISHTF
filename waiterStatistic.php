@@ -58,10 +58,10 @@ $connection = new sqlConnection;
             
         
         $result = mysql_query("SELECT * FROM Burger WHERE BID IN 
-                                (SELECT BID FROM Serve WHERE TID IN 
+                                (SELECT BID FROM Serve WHERE WID = $wid AND TID IN 
                                     (SELECT TID FROM  `Table` WHERE TSmoker = $smoker AND TID IN 
                                         (SELECT TID FROM Serve WHERE WID = $wid)))");
-                
+                   
         while ($burger = mysql_fetch_array($result)) {
             echo $burger["BName"]; ?><br><?php
         }        
