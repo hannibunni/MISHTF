@@ -13,25 +13,50 @@ and open the template in the editor.
     <body>
     <h1>Projekt MISHTF</h1>
     <hr>
-    <br>
-    <form method="link" action="addBurger.php">
-    <input type="submit" value="Add new Burger">
-    </form>
-    <br>
-    <form method="link" action="deleteBurger.php">
-    <input type="submit" value="Delete a Burger">
-    </form>
-    <br>
-    <form method="link" action="getBurgers.php">
-    <input type="submit" value="Get Burgers">
-    </form>
-    <br>
-    <form method="link" action="waiterStatistic.php">
-    <input type="submit" value="Waiter Statistic">
-    </form>
+    <table width="600" border="0" bordercolor="#333333" cellspacing="0" cellpadding="2">
+      <tr>
+        <td width="117" height="5" align="left" valign="middle">
+        <form method="link" action="addBurger.php">
+            <input type="submit" value="Add new Burger">
+        </form>
+        </td>
+        <td width="483" height="5" align="left" valign="middle">Here you can add new burgers.</td>
+      </tr>
+      <tr>
+        <td height="5" align="left" valign="middle">
+        <form method="link" action="deleteBurger.php">
+        <input type="submit" value="Delete a Burger">
+        </form>
+        </td>
+        <td height="5" align="left" valign="middle">Here you can delete existing burgers.</td>
+      </tr>
+      <tr>
+        <td height="5" align="left" valign="middle">
+        <form method="link" action="getBurgers.php">
+        <input type="submit" value="Get Burgers">
+        </form></td>
+        <td height="5" align="left" valign="middle">Here you can see which burger is brought by a waiter to a specific table.</td>
+      </tr>
+      <tr>
+        <td height="5" align="left" valign="middle">
+        <form method="link" action="waiterStatistic.php">
+        <input type="submit" value="Waiter Statistic">
+        </form>
+        </td>
+        <td height="5" align="left" valign="middle">Here you can see a statistic of a specific waiter which Burger were served by him.</td>
+      </tr>
+      <tr>
+        <td height="5" align="left" valign="middle">
+        <form method="link" action="getServes.php">
+        <input type="submit" value="Get Serves">
+        </form>
+        </td>
+        <td height="5" align="left" valign="middle">Here you get a over all statistic in the XSL format.</td>
+      </tr>
+    </table>
     <br>
     <hr>
     <br>
     by Hasenauer Hannes, Temmel Hans Christian, Fritzsch Daniel
-    </body>
+</body>
 </html>
