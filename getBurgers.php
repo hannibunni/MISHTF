@@ -10,7 +10,7 @@ which got served to this table by your chosen waiter <br>
 <?php
     
     $waiters = mysql_query("select * from `Waiter`") or die(mysql_error());
-    $tables = mysql_query("SELECT * FROM `Table`") or die(mysql_error());
+    $tables = mysql_query("SELECT * from `Table`") or die(mysql_error());
     
 ?>
 
@@ -19,11 +19,11 @@ which got served to this table by your chosen waiter <br>
         while($waiter = mysql_fetch_array($waiters)) {
             if ($_POST["waiter"] == $waiter["WID"]) {
                 echo '<option selected = yes value="' . $waiter["WID"] . '">' .
-                    $waiter["WLastName"] . ", " . $waiter["WFirstName"] . '</option>';
+                    $waiter["WLastName"] . " " . $waiter["WFirstName"] . '</option>';
             }
             else {
                 echo '<option value="' . $waiter["WID"] . '">' .
-                    $waiter["WLastName"] . ", " . $waiter["WFirstName"] . '</option>';
+                    $waiter["WLastName"] . " " . $waiter["WFirstName"] . '</option>';
             }
         }
     

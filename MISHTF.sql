@@ -77,6 +77,8 @@ INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
   (2, 4, 3, 1);
 INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
   (2, 4, 1, 3, '2011-04-03 16:00:42');
+INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+  (2, 6, 2, 2);
 INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
   (3, 2, 2, 2, '2008-06-05 14:05:42');
 INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
