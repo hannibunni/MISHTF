@@ -16,7 +16,7 @@
 			<title>ALL SERVES</title>
 		</head>
 		<body>
-        <p>Stylesheet 1 - All tables.</p>
+        <p>Stylesheet 2 - Just the table where smoking is allowed.</p>
 			<table border="1">
 				<tr>
 					<td><strong>Waiter</strong></td>
@@ -25,12 +25,14 @@
 					<td><strong>SideDishes</strong></td>
 				</tr>  
 				<xsl:for-each select="serves/SERVE">
+                <xsl:if test="TABLE/SMOKE &gt; 0">
 					<tr>
 						<td><xsl:value-of select="WAITER/LASTNAME"/>&#160;<xsl:value-of select="WAITER/FIRSTNAME" /></td>
 						<td><xsl:value-of select="TABLE/NUMBER" /></td>
 						<td><xsl:value-of select="BURGER/BNAME"/></td>
 						<td><xsl:value-of select="SIDEDISHES/SNAME" /></td>
 					</tr>
+                    </xsl:if>
 				</xsl:for-each>
 			</table>
 		</body>
