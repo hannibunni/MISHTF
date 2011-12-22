@@ -68,7 +68,7 @@
 </head>
 
 <body>
-<h1>Get all serves </h1>
+<h1>Get  serves </h1>
 <hr />
 <p>Please select a Stylesheet and where to generate.</p>
 <form id="form" name="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
