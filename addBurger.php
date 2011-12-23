@@ -6,22 +6,20 @@
 <form action="addBurger.php" method="POST">
 
     What Burger you want to add? <br>
-    name:
-    <input type="text" name="bName"></input> <br>
-    price:
-    <input type="text" name="bPrice"></input> <br>
+    name:   <input type="text" name="bName"></input> <br>
+    price:  <input type="text" name="bPrice"></input> <br>
+
     <input type="submit" value="Submit"></input>
 
 </form>
 
 <?php
-
     if (isset ($_POST["bName"]) && $_POST["bPrice"]) {
         
-        $bName = $_POST["bName"];
+        $bName  = $_POST["bName"];
         $bPrice = $_POST["bPrice"];
-        $query = "INSERT INTO `Burger` (`BID`, `BName`, `BPrice`)
-                  VALUES (NULL, '$bName', '$bPrice');";
+        $query  = "INSERT INTO `Burger` (`BID`, `BName`, `BPrice`)
+                   VALUES (NULL, '$bName', '$bPrice');";
         
         mysql_query($query) or die (mysql_error());
         echo ("Burger $bName has been added to database");

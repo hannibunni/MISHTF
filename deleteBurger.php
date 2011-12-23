@@ -1,3 +1,4 @@
+<META HTTP-EQUIV=Refresh CONTENT="3">
 <?php
     include('sqlConnection.php');
     $connection = new sqlConnection;

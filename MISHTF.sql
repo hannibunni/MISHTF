@@ -42,11 +42,11 @@ INSERT INTO `Burger` (`BName`, `BPrice`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `Serve`
+-- Tabellenstruktur für Tabelle `SalesSlip`
 --
 
-CREATE TABLE IF NOT EXISTS `Serve` (
-  `ID`        int(100) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `SalesSlip` (
+  `ID`         int(100) unsigned NOT NULL AUTO_INCREMENT,
   `WID`        int(5) unsigned NOT NULL,
   `TID`        int(5) unsigned NOT NULL,
   `BID`        int(5) unsigned,
@@ -56,38 +56,38 @@ CREATE TABLE IF NOT EXISTS `Serve` (
 );
 
 --
--- Daten für Tabelle `Serve`
+-- Daten für Tabelle `SalesSlip`
 --
 
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
   (1, 5, 1, 1);
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
   (1, 6, 2, 2);
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
   (1, 7, 3, 3);
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
   (1, 5, 0, 2, '2010-11-18 12:00:30');
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
   (1, 6, 1, 3);
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
   (1, 7, 3, 1);
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
   (2, 3, 5, 2, '2009-08-10 10:04:30');
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
   (2, 4, 3, 1);
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
   (2, 4, 1, 3, '2011-04-03 16:00:42');
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
   (2, 6, 2, 2);
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
   (3, 2, 2, 2, '2008-06-05 14:05:42');
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
   (3, 2, 1, 4);
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
   (4, 1, 4, 3);
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
   (4, 1, 2, 4);
-INSERT INTO `Serve` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
   (4, 1, 5, 2, '2010-09-14 17:00:51');
 
 -- --------------------------------------------------------
