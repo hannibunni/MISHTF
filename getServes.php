@@ -8,10 +8,10 @@
         ($_POST["generate"]   != "nogenerator")) {
 	 
         $result = mysql_query("SELECT Waiter.WFirstName, Waiter.WLastName, Table.TID, Table.TSmoker, 
-                              Burger.BName, SideDishes.SName, SalesSlip.STimeStamp FROM `Waiter`, `Table`, 
-                              `Burger`, `SideDishes`, `SalesSlip` WHERE Waiter.WID = SalesSlip.WID 
+                              Burger.BName, SideDish.SName, SalesSlip.STimeStamp FROM `Waiter`, `Table`, 
+                              `Burger`, `SideDish`, `SalesSlip` WHERE Waiter.WID = SalesSlip.WID 
                               AND Table.TID = SalesSlip.TID AND Burger.BID = SalesSlip.BID 
-                              AND SideDishes.SID = SalesSlip.SID") or die(mysql_error());
+                              AND SideDish.SID = SalesSlip.SID") or die(mysql_error());
 
         $body = '<?xml version="1.0" encoding="UTF-8" ?>
 	  			<?xml-stylesheet type="text/xsl" href="'.$_POST['stylesheet'].'" ?>

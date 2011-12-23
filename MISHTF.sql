@@ -93,10 +93,10 @@ INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `SideDishes`
+-- Tabellenstruktur für Tabelle `SideDish`
 --
 
-CREATE TABLE IF NOT EXISTS `SideDishes` (
+CREATE TABLE IF NOT EXISTS `SideDish` (
   `SID`         int(5) unsigned NOT NULL AUTO_INCREMENT,
   `SName`       varchar(15) NOT NULL,
   `SPrice`      float(4,2) NOT NULL,
@@ -105,16 +105,16 @@ CREATE TABLE IF NOT EXISTS `SideDishes` (
 );
 
 --
--- Daten für Tabelle `SideDishes`
+-- Daten für Tabelle `SideDish`
 --
 
-INSERT INTO `SideDishes` (`SName`, `SPrice`, `SGlutenFree`) VALUES
+INSERT INTO `SideDish` (`SName`, `SPrice`, `SGlutenFree`) VALUES
   ('Pommes', 2.5, true);
-INSERT INTO `SideDishes` (`SName`, `SPrice`) VALUES
+INSERT INTO `SideDish` (`SName`, `SPrice`) VALUES
   ('Potatoes', 2);
-INSERT INTO `SideDishes` (`SName`, `SPrice`) VALUES
+INSERT INTO `SideDish` (`SName`, `SPrice`) VALUES
   ('Potato Stripes', 2.7);
-INSERT INTO `SideDishes` (`SName`, `SPrice`, `SGlutenFree`) VALUES
+INSERT INTO `SideDish` (`SName`, `SPrice`, `SGlutenFree`) VALUES
   ('Rice', 2, true);
 
 -- --------------------------------------------------------
