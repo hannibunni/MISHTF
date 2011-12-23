@@ -8,6 +8,20 @@
 \usepackage{fullpage}
 \usepackage{graphicx}
 \usepackage{alltt}
+
+\usepackage{listings} 
+\lstset{	numbers=left, 
+		numberstyle=\tiny, 
+		numbersep=5pt,
+		stepnumber=2,
+		showspaces=false,
+		showstringspaces=false,
+		tabsize=4,
+		captionpos=b,
+		backgroundcolor=\color{white},
+		frame=single,
+		language=PHP}
+
 \pagestyle{fancy}
 \setlength{\headheight}{12.4pt}
 \setlength{\headsep}{1.5\headheight}
@@ -169,5 +183,248 @@ Every domain in the relation is only identifiable by a unique primary key. There
 
 \pagebreak
 \section{Practical Implementation}
+
+For all primary keys auto increment values are used. This is done to assign a unique identifier to every relation who contains a primary key automatically.
+
+\subsection{Waiter}
+
+\subsubsection{Relation}
+
+\begin{verbatim}
+CREATE TABLE IF NOT EXISTS `Waiter` (
+	`WID`		int(5) unsigned NOT NULL AUTO_INCREMENT,
+  	`WFirstName` 	varchar(30) NOT NULL,
+  	`WLastName`  	varchar(30) NOT NULL,
+  	`WAddress`   	varchar(100) NOT NULL,
+  	`WAge`       	int(3) NOT NULL,
+  	`WGender`    	varchar(10) NOT NULL,
+  	PRIMARY KEY (`WID`)
+);
+\end{verbatim}
+
+\subsubsection{Data}
+
+\begin{verbatim}
+INSERT INTO `Waiter` (`WFirstName`, `WLastName`, `WAddress`, `WAge`, `WGender`) VALUES
+  	('Daniel', 'Fritzsch', 'Daniels Address', 20, 'male');
+INSERT INTO `Waiter` (`WFirstName`, `WLastName`, `WAddress`, `WAge`, `WGender`) VALUES
+  	('Hannes', 'Hasenauer', 'Hannes Address', 23, 'male');
+INSERT INTO `Waiter` (`WFirstName`, `WLastName`, `WAddress`, `WAge`, `WGender`) VALUES
+  	('Hans Christian', 'Temmel', 'Hans Christians Address', 25, 'male');
+INSERT INTO `Waiter` (`WFirstName`, `WLastName`, `WAddress`, `WAge`, `WGender`) VALUES
+  	('Sandra', 'Steal', 'Sandras Address', 15, 'female');
+\end{verbatim}
+
+\subsubsection{Screenshot}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.9]{fig/waiter.png}
+	\caption{Waiter}
+\end{figure}
+
+\subsection{Table}
+
+\subsubsection{Relation}
+
+\begin{verbatim}
+CREATE TABLE IF NOT EXISTS `Table` (
+  	`TID`      		int(5) unsigned NOT NULL AUTO_INCREMENT,
+  	`TSmoker`  	tinyint(1) NOT NULL DEFAULT FALSE,
+  	`TSeats`   		int(2) unsigned NOT NULL,
+  	PRIMARY KEY (`TID`)
+);
+\end{verbatim}
+
+\subsubsection{Data}
+
+\begin{verbatim}
+-- NonSmoking Tables
+INSERT INTO `Table` (`TSeats`) VALUES (4);
+INSERT INTO `Table` (`TSeats`) VALUES (4);
+INSERT INTO `Table` (`TSeats`) VALUES (2);
+INSERT INTO `Table` (`TSeats`) VALUES (5);
+
+-- Smoking Tables
+INSERT INTO `Table` (`TSmoker`, `TSeats`) VALUES (true, 4);
+INSERT INTO `Table` (`TSmoker`, `TSeats`) VALUES (true, 2);
+INSERT INTO `Table` (`TSmoker`, `TSeats`) VALUES (true, 5);
+\end{verbatim}
+
+\subsubsection{Screenshot}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.9]{fig/table.png}
+	\caption{Table}
+\end{figure}
+
+\subsection{Burger}
+
+\subsubsection{Relation}
+
+\begin{verbatim}
+CREATE TABLE IF NOT EXISTS `Burger` (
+  	`BID`    	int(5) unsigned NOT NULL AUTO_INCREMENT,
+  	`BName`  	varchar(25) NOT NULL,
+  	`BPrice` 	float(4,2) NOT NULL,
+  	PRIMARY KEY (`BID`)
+);
+\end{verbatim}
+
+\subsubsection{Data}
+
+\begin{verbatim}
+INSERT INTO `Burger` (`BName`, `BPrice`) VALUES
+  	('Manhattan Burger', 6);
+INSERT INTO `Burger` (`BName`, `BPrice`) VALUES
+  	('NewYork Classic', 6.5);
+INSERT INTO `Burger` (`BName`, `BPrice`) VALUES
+  	('Extra Meat Burger', 8);
+INSERT INTO `Burger` (`BName`, `BPrice`) VALUES
+  	('Hot Chicken Burger', 7.25);
+INSERT INTO `Burger` (`BName`, `BPrice`) VALUES
+  	('Austrian Burger', 7.5);
+\end{verbatim}
+
+\subsubsection{Screenshot}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.9]{fig/burger.png}
+	\caption{Burger}
+\end{figure}
+
+\subsection{SideDish}
+
+\subsubsection{Relation}
+
+\begin{verbatim}
+CREATE TABLE IF NOT EXISTS `SideDish` (
+  	`SID`         		int(5) unsigned NOT NULL AUTO_INCREMENT,
+  	`SName`       	varchar(15) NOT NULL,
+  	`SPrice`      	float(4,2) NOT NULL,
+  	`SGlutenFree` 	tinyint(1) NOT NULL DEFAULT FALSE,
+  	PRIMARY KEY (`SID`)
+);
+\end{verbatim}
+
+\subsubsection{Data}
+
+\begin{verbatim}
+INSERT INTO `SideDish` (`SName`, `SPrice`, `SGlutenFree`) VALUES
+  	('Pommes', 2.5, true);
+INSERT INTO `SideDish` (`SName`, `SPrice`) VALUES
+  	('Potatoes', 2);
+INSERT INTO `SideDish` (`SName`, `SPrice`) VALUES
+  	('Potato Stripes', 2.7);
+INSERT INTO `SideDish` (`SName`, `SPrice`, `SGlutenFree`) VALUES
+  	('Rice', 2, true);
+\end{verbatim}
+
+\subsubsection{Screenshot}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.9]{fig/sidedish.png}
+	\caption{SideDish}
+\end{figure}
+
+\subsection{SalesSlip}
+
+\subsubsection{Relation}
+
+\begin{verbatim}
+CREATE TABLE IF NOT EXISTS `SalesSlip` (
+  	`ID`       		int(100) unsigned NOT NULL AUTO_INCREMENT,
+  	`WID`        		int(5) unsigned NOT NULL,
+  	`TID`        		int(5) unsigned NOT NULL,
+  	`BID`        		int(5) unsigned,
+  	`SID`        		int(5) unsigned,
+  	`STimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  	PRIMARY KEY (`ID`)
+);
+\end{verbatim}
+
+\subsubsection{Data}
+
+\begin{verbatim}
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
+  	(1, 5, 1, 1);
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
+  	(1, 6, 2, 2);
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
+  	(1, 7, 3, 3);
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+  	(1, 5, 0, 2, '2010-11-18 12:00:30');
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
+  	(1, 6, 1, 3);
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
+  	(1, 7, 3, 1);
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+  	(2, 3, 5, 2, '2009-08-10 10:04:30');
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
+  	(2, 4, 3, 1);
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+  	(2, 4, 1, 3, '2011-04-03 16:00:42');
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
+  	(2, 6, 2, 2);
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+  	(3, 2, 2, 2, '2008-06-05 14:05:42');
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
+  	(3, 2, 1, 4);
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
+  	(4, 1, 4, 3);
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`) VALUES
+  	(4, 1, 2, 4);
+INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
+  	(4, 1, 5, 2, '2010-09-14 17:00:51');
+\end{verbatim}
+
+\pagebreak
+\subsubsection{Screenshot}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.9]{fig/salesslip.png}
+	\caption{SalesSlip}
+\end{figure}
+
+\pagebreak
+\subsection{Adding a new Burger}
+
+\begin{lstlisting}[caption=addBurger.php]
+<?php
+    include('sqlConnection.php');
+    $connection = new sqlConnection;
+?>
+
+<form action="addBurger.php" method="POST">
+
+    What Burger you want to add? <br>
+    name:   <input type="text" name="bName"></input> <br>
+    price:  <input type="text" name="bPrice"></input> <br>
+
+    <input type="submit" value="Submit"></input>
+
+</form>
+
+<?php
+    if (isset ($_POST["bName"]) && $_POST["bPrice"]) {
+        
+        $bName  = $_POST["bName"];
+        $bPrice = $_POST["bPrice"];
+        $query  = "INSERT INTO `Burger` (`BID`, `BName`, `BPrice`)
+                   VALUES (NULL, '$bName', '$bPrice');";
+        
+        mysql_query($query) or die (mysql_error());
+        echo ("Burger $bName has been added to database");
+    }
+?>
+
+<form method="link" action="index.html">
+<input type="submit" value="Back to Main">
+</form>
+\end{lstlisting}
 
 \end{document}
