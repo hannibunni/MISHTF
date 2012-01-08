@@ -592,5 +592,78 @@ Gets all burgers that are served by a given waiter to a specific table.
 \end{lstlisting}
 You can choose a waiter to see the statistic of the Burgers that have been served by him.
 
+\subsection{Update the price of a burger}
+
+\begin{lstlisting}[caption=updateBurgerPrice.php]
+<form action="updateBurgerPrice.php" method="POST">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="40">Burger:</td>
+    <td width="475">
+    <?php
+        $burgers = mysql_query("select * from `Burger`;") 
+        			or die (mysql_error());
+    ?>
+    <select name="burger" onchange="this.form.submit()">
+    <?php 
+        if (!isset($_POST["burger"])) {   
+    ?>
+    <option>-</option>
+    
+    
+    <?php }
+        while($burger = mysql_fetch_array($burgers)) {
+            if ($_POST["burger"] == $burger["BID"]) {
+                echo ('<option selected value="' . $burger["BID"] . '">' . 
+                      $burger["BName"] . '</option>');
+            } else {
+                echo ('<option value="' . $burger["BID"] . '">' . 
+                      $burger["BName"] . '</option>'); 
+            }
+        } 
+    ?>
+
+<?php }
+    if (!isset($_POST["burger"]) && !isset($_POST["updatePrice"]))
+        return;
+    
+    if (!isset($_POST["updatePrice"])){
+        $bid = $_POST["burger"];
+        $result = mysql_query("select * from `Burger` where BID = $bid");
+        $price = mysql_fetch_array($result);
+        echo $price["BName"] . " currently is " . $price["BPrice"] . "$";  
+    }
+?>
+
+<form action="updateBurgerPrice.php" method="POST">
+    If you want to change the price of the currently selected Burger enter 
+    the new value here: <br>
+    <?php   
+        $bid = $_POST["burger"];
+        echo '<input type="hidden" name="burger" value="'.$bid.'">';
+    ?>
+    <input type="text" name="updatePrice"></input> [0-99] <br>
+    <br />
+    <input type="submit" value="update">
+</form>
+
+<?php
+    if (isset($_POST["updatePrice"])) {
+        $newPrice = $_POST["updatePrice"];
+        $bid = $_POST["burger"];
+        $result = mysql_query("select * from `Burger` where BID = $bid");
+        $name = mysql_fetch_array($result);
+        
+        if (is_numeric($newPrice) && $newPrice >=0 && $newPrice <= 99) {
+            mysql_query("UPDATE `Burger` SET BPrice='$newPrice' 
+            WHERE BID=$bid");
+            
+            echo"Changed the price of ".$name["BName"]." to ".$newPrice."$"; 
+        } else
+            echo "Please enter the price as an integer value [0-99]";
+    }
+?>
+\end{lstlisting}
+
 
 \end{document}
