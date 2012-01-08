@@ -3,22 +3,35 @@
     $connection = new sqlConnection;
 ?>
 
-<form action="updateBurgerPrice.php" method="POST">
-Select a burger to change its price: <br>
 
-<?php
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Update Burger Price</title>
+<link href="stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+        <h1>Update Burger Price</h1>
+        <hr />
+        <p>Select a burger to change its price.</p>
+        <br>
+<form action="updateBurgerPrice.php" method="POST">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="125">Burger:</td>
+    <td width="475"><?php
     $burgers = mysql_query("select * from `Burger`;") or die (mysql_error());
 ?>
-
-<select name="burger" onchange="this.form.submit()">
-    
-<?php 
+      <select name="burger" onchange="this.form.submit()">
+        <?php 
 if (!isset($_POST["burger"])) {   
 ?>
-<option>-</option>
-<?php } ?>
-
-<?php
+        <option>-</option>
+        <?php } ?>
+        <?php
     while($burger = mysql_fetch_array($burgers)) {
         if ($_POST["burger"] == $burger["BID"]) {
             echo ('<option selected value="' . $burger["BID"] . '">' . 
@@ -30,14 +43,19 @@ if (!isset($_POST["burger"])) {
         }
     } 
 ?>
-</select>
+      </select></td>
+  </tr>
+</table>
 </form>
 
 <?php 
 if (!isset($_POST["burger"]) && !isset($_POST["updatePrice"])) {   
 ?>
+<br />        <br>
+        <hr />
+        <br>
 <form method="link" action="index.html">
-<input type="submit" value="Back to Main">
+  <input type="submit" value="Back to Main">
 </form>
 <?php } ?>
 
@@ -68,6 +86,7 @@ if (!isset($_POST["burger"]) && !isset($_POST["updatePrice"])) {
     
     ?>
     <input type="text" name="updatePrice"></input> <br>
+    <br />
     <input type="submit" value="update">
 </form>
 
@@ -90,8 +109,12 @@ if (!isset($_POST["burger"]) && !isset($_POST["updatePrice"])) {
         
 
 ?>
-
+        <br>
+        <hr />
+        <br>
 <form method="link" action="index.html">
 <input type="submit" value="Back to Main">
 </form>
 
+</body>
+</html>
