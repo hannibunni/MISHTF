@@ -13,54 +13,50 @@
 </head>
 
 <body>
-
-        <h1>Update Burger Price</h1>
-        <hr />
-        <p>Select a burger to change its price.</p>
-        <br>
+    <h1>Update Burger Price</h1>
+    <hr />
+    <p>Select a burger to change its price:</p>
+    <br>
 <form action="updateBurgerPrice.php" method="POST">
 <table width="600" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="125">Burger:</td>
-    <td width="475"><?php
-    $burgers = mysql_query("select * from `Burger`;") or die (mysql_error());
-?>
-      <select name="burger" onchange="this.form.submit()">
-        <?php 
-if (!isset($_POST["burger"])) {   
-?>
-        <option>-</option>
-        <?php } ?>
-        <?php
-    while($burger = mysql_fetch_array($burgers)) {
-        if ($_POST["burger"] == $burger["BID"]) {
-            echo ('<option selected value="' . $burger["BID"] . '">' . 
-                $burger["BName"] . '</option>');
-        }
-        else {
-            echo ('<option value="' . $burger["BID"] . '">' . 
-                $burger["BName"] . '</option>'); 
-        }
-    } 
-?>
-      </select></td>
+    <td width="40">Burger:</td>
+    <td width="475">
+    <?php
+        $burgers = mysql_query("select * from `Burger`;") or die (mysql_error());
+    ?>
+    <select name="burger" onchange="this.form.submit()">
+    <?php 
+        if (!isset($_POST["burger"])) {   
+    ?>
+    <option>-</option>
+    <?php }
+        while($burger = mysql_fetch_array($burgers)) {
+            if ($_POST["burger"] == $burger["BID"]) {
+                echo ('<option selected value="' . $burger["BID"] . '">' . 
+                      $burger["BName"] . '</option>');
+            } else {
+                echo ('<option value="' . $burger["BID"] . '">' . 
+                      $burger["BName"] . '</option>'); 
+            }
+        } 
+    ?>
+    </select>
+    </td>
   </tr>
 </table>
 </form>
 
 <?php 
-if (!isset($_POST["burger"]) && !isset($_POST["updatePrice"])) {   
+    if (!isset($_POST["burger"]) && !isset($_POST["updatePrice"])) {   
 ?>
-<br />        <br>
-        <hr />
-        <br>
+<br /><br>
+<hr />
+<br>
 <form method="link" action="index.html">
-  <input type="submit" value="Back to Main">
+    <input type="submit" value="Back to Main">
 </form>
-<?php } ?>
-
-<?php
-
+<?php }
     if (!isset($_POST["burger"]) && !isset($_POST["updatePrice"]))
         return;
     
@@ -70,28 +66,23 @@ if (!isset($_POST["burger"]) && !isset($_POST["updatePrice"])) {
         $price = mysql_fetch_array($result);
         echo $price["BName"] . " currently is " . $price["BPrice"] . "$";  
     }
-    
 ?>
 
 <br>
 <br>
 <form action="updateBurgerPrice.php" method="POST">
-    If you want to change the price of the currently selected Burger enter the new value here
+    If you want to change the price of the currently selected Burger enter the new value here:
     <br>
-    <?php
-   
-    $bid = $_POST["burger"];
-    
-    echo '<input type="hidden" name="burger" value="'.$bid.'">';
-    
+    <?php   
+        $bid = $_POST["burger"];
+        echo '<input type="hidden" name="burger" value="'.$bid.'">';
     ?>
-    Price [0-99]<input type="text" name="updatePrice"></input> <br>
+    <input type="text" name="updatePrice"></input> [0-99] <br>
     <br />
     <input type="submit" value="update">
 </form>
 
 <?php
-
     if (isset($_POST["updatePrice"])) {
         $newPrice = $_POST["updatePrice"];
         $bid = $_POST["burger"];
@@ -101,20 +92,15 @@ if (!isset($_POST["burger"]) && !isset($_POST["updatePrice"])) {
         if (is_numeric($newPrice) && $newPrice >=0 && $newPrice <= 99) {
             mysql_query("UPDATE `Burger` SET BPrice='$newPrice' WHERE BID=$bid");
             echo"Changed the price of " . $name["BName"] . " to " . $newPrice . "$"; 
-        }
-        else {
+        } else
             echo "Please enter the price as an integer value [0-99]";
-        }
     }
-        
-
 ?>
-        <br>
-        <hr />
-        <br>
+<br>
+<hr />
+<br>
 <form method="link" action="index.html">
-<input type="submit" value="Back to Main">
+    <input type="submit" value="Back to Main">
 </form>
-
 </body>
 </html>
