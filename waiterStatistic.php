@@ -27,10 +27,11 @@ Choose a waiter to see the statistic of the Burgers served by him: <br>
     
 <?php
     if (isset ($_POST["smokertable"]))
-        echo '<input type="checkbox" name="smokertable" checked> Smoker Table';
+        echo '<input type="checkbox" name="smokertable" checked>';
     else
         echo '<input type="checkbox" name="smokertable">';
 ?>
+Smoker Table
 <br>
 <input type="submit">
 </form>
