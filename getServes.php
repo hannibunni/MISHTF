@@ -101,8 +101,12 @@
             <p><input type="submit"/></p>
         </form>
     
-        <p>&nbsp;</p>
+        <br>
         <hr />
-        <p><a href="index.html">Index</a></p>
+        <br>
+
+<form method="link" action="index.html">
+<input type="submit" value="Back to Main">
+</form>
     </body>
 </html>
