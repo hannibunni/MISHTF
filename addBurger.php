@@ -46,11 +46,11 @@
         $query  = "INSERT INTO `Burger` (`BID`, `BName`, `BPrice`)
                    VALUES (NULL, '$bName', '$bPrice');";
         
-        if (is_numeric($bPrice)) {
+        if (is_numeric($bPrice) && $bPrice >= 0 && $bPrice <= 99) {
             mysql_query($query) or die (mysql_error());
             echo ("Burger $bName has been added to database");
         } else {
-            echo "Please enter the price as an integer value";
+            echo "Please enter the price as an integer value [0-99]";
         }
 
     }

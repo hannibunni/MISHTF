@@ -85,7 +85,7 @@ if (!isset($_POST["burger"]) && !isset($_POST["updatePrice"])) {
     echo '<input type="hidden" name="burger" value="'.$bid.'">';
     
     ?>
-    <input type="text" name="updatePrice"></input> <br>
+    Price [0-99]<input type="text" name="updatePrice"></input> <br>
     <br />
     <input type="submit" value="update">
 </form>
@@ -98,12 +98,12 @@ if (!isset($_POST["burger"]) && !isset($_POST["updatePrice"])) {
         $result = mysql_query("select * from `Burger` where BID = $bid");
         $name = mysql_fetch_array($result);
         
-        if (is_numeric($newPrice)) {
+        if (is_numeric($newPrice) && $newPrice >=0 && $newPrice <= 99) {
             mysql_query("UPDATE `Burger` SET BPrice='$newPrice' WHERE BID=$bid");
             echo"Changed the price of " . $name["BName"] . " to " . $newPrice . "$"; 
         }
         else {
-            echo "Please enter the price as an integer value";
+            echo "Please enter the price as an integer value [0-99]";
         }
     }
         
