@@ -26,7 +26,7 @@
         <td width="472"><input type="text" name="bName"></input></td>
       </tr>
       <tr>
-        <td>Price</td>
+        <td>Price [0-99]</td>
         <td><input type="text" name="bPrice"></input></td>
       </tr>
     </table>
@@ -46,8 +46,13 @@
         $query  = "INSERT INTO `Burger` (`BID`, `BName`, `BPrice`)
                    VALUES (NULL, '$bName', '$bPrice');";
         
-        mysql_query($query) or die (mysql_error());
-        echo ("Burger $bName has been added to database");
+        if (is_numeric($bPrice)) {
+            mysql_query($query) or die (mysql_error());
+            echo ("Burger $bName has been added to database");
+        } else {
+            echo "Please enter the price as an integer value";
+        }
+
     }
 ?>
 
