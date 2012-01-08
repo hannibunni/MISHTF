@@ -15,11 +15,11 @@
 
         <h1>Add Burger</h1>
         <hr />
-        <p>Please select a Stylesheet and where to generate.</p>
+        <p>What Burger you want to add? </p>
 
 <form action="addBurger.php" method="POST">
 
-    <p>What Burger you want to add? </p>
+    
     <table width="600" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="128">Name:</td>
