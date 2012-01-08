@@ -74,6 +74,8 @@ which got served to the given table by your chosen waiter:</p>
         $result = mysql_query("select BName from Burger where BID in 
                                   (select BID from SalesSlip where WID = $wid and TID = $tid)");
         
+        if (mysql_num_rows($result) == 0)
+            echo "This waiter has not served any Burgers to this specific table";
         while ($burger = mysql_fetch_array($result)) {
             echo $burger["BName"] . " at table " . $tid . " by " 
                     . $name->WFirstName . " " . $name->WLastName; ?><br><?php

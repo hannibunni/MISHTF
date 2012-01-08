@@ -77,6 +77,9 @@
                                 (SELECT BID FROM `SalesSlip` WHERE WID = $wid AND TID IN 
                                     (SELECT TID FROM  `Table` WHERE TSmoker = $smoker AND TID IN 
                                         (SELECT TID FROM `SalesSlip` WHERE WID = $wid)))");
+        
+        if (mysql_num_rows($result) == 0)
+            echo "No entries for the selected values found";
                    
         while ($burger = mysql_fetch_array($result)) {
             echo $burger["BName"]; ?><br><?php
