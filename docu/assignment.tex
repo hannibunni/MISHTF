@@ -423,7 +423,7 @@ INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
     }
 ?>
 \end{lstlisting}
-This file is used to add a new burger to the database.
+This file is used to add a new burger to the database. It is necessary to use a valid value [0-99] as price.
 
 \subsection{Delete a Burger}
 
@@ -521,7 +521,7 @@ This file is used to delete an existing burger from the database.
     }
 ?>
 \end{lstlisting}
-Gets all burgers that are served by a given waiter to a specific table.
+Gets all burgers that are served by a given waiter to a specific table. 
 
 \subsection{Get all burgers that have been served by a a specific waiter}
 
@@ -590,7 +590,8 @@ Gets all burgers that are served by a given waiter to a specific table.
     }
 ?>
 \end{lstlisting}
-You can choose a waiter to see the statistic of the Burgers that have been served by him.
+You can choose a waiter to see the statistic of the Burgers that have been served by him. Additionally you 
+can check or uncheck to differ from smoker and non-smoker tables.
 
 \subsection{Update the price of a burger}
 
@@ -664,6 +665,6 @@ You can choose a waiter to see the statistic of the Burgers that have been serve
     }
 ?>
 \end{lstlisting}
-
+You can choose any Burger from a Dropdown menu and change its price. The new value also has to be valid [0-99].
 
 \end{document}
