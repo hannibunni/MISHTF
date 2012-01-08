@@ -23,10 +23,18 @@
 
 
 <?php
+    if(isset ($_POST["burger"])) {
+        $burger = $_POST["burger"];
+        $query  = "DELETE FROM `Burger` WHERE BName='$burger';";
+        
+        mysql_query($query) or die (mysql_error());
+    }
+    
     $burgers = mysql_query("select * from `Burger`;") or die (mysql_error());
 ?>
 
 <select name="burger">
+
 <?php
     while($burger = mysql_fetch_array($burgers)) {
         echo ('<option value="' . $burger["BName"] . '">' . 
@@ -43,9 +51,6 @@
 <?php
     if(isset ($_POST["burger"])) {
         $burger = $_POST["burger"];
-        $query  = "DELETE FROM `Burger` WHERE BName='$burger';";
-        
-        mysql_query($query) or die (mysql_error());
         
         echo ("'$burger' has been deleted!");
     }
