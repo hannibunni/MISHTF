@@ -29,7 +29,7 @@
 % 1. Person eintragen
 \newcommand{\FirstAuthor}{Hasenauer}
 \newcommand{\FirstAuthorFirstName}{Hannes}
-\newcommand{\FirstAuthorMatnum}{**********}
+\newcommand{\FirstAuthorMatnum}{0930213}
 
 % 2. Person eintragen
 \newcommand{\SecAuthor}{Fritzsch}
@@ -39,7 +39,7 @@
 % 3. Person eintragen
 \newcommand{\ThirdAuthor}{Temmel}
 \newcommand{\ThirdAuthorFirstName}{Hans Christian}
-\newcommand{\ThirdAuthorMatnum}{*********}
+\newcommand{\ThirdAuthorMatnum}{0930308}
 
 \newcommand{\AuthorFront}{{\normalsize
 \begin{tabular}{|c|c|c|} \hline
@@ -391,22 +391,23 @@ INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
 \end{figure}
 
 \pagebreak
+\section{Relevant Code Snippets}
 \subsection{Adding a new Burger}
 
 \begin{lstlisting}[caption=addBurger.php]
-<?php
-    include('sqlConnection.php');
-    $connection = new sqlConnection;
-?>
-
 <form action="addBurger.php" method="POST">
-
-    What Burger you want to add? <br>
-    name:   <input type="text" name="bName"></input> <br>
-    price:  <input type="text" name="bPrice"></input> <br>
-
+    <table width="600" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="128">Name:</td>
+        <td width="472"><input type="text" name="bName"></input></td>
+      </tr>
+      <tr>
+        <td>Price</td>
+        <td><input type="text" name="bPrice"></input></td>
+      </tr>
+    </table>
+    
     <input type="submit" value="Submit"></input>
-
 </form>
 
 <?php
@@ -421,10 +422,175 @@ INSERT INTO `SalesSlip` (`WID`, `TID`, `BID`, `SID`, `STimeStamp`) VALUES
         echo ("Burger $bName has been added to database");
     }
 ?>
-
-<form method="link" action="index.html">
-<input type="submit" value="Back to Main">
-</form>
 \end{lstlisting}
+This file is used to add a new burger to the database.
+
+\subsection{Delete a Burger}
+
+\begin{lstlisting}[caption=deleteBurger.php]
+<form action="deleteBurger.php" method="POST">
+<?php
+    if(isset ($_POST["burger"])) {
+        $burger = $_POST["burger"];
+        $query  = "DELETE FROM `Burger` WHERE BName='$burger';";
+        
+        mysql_query($query) or die (mysql_error());
+    }
+    $burgers = mysql_query("select * from `Burger`;") or die (mysql_error());
+?>
+
+<select name="burger">
+<?php
+    while($burger = mysql_fetch_array($burgers)) {
+        echo ('<option value="' . $burger["BName"] . '">' . 
+            $burger["BName"] . '</option>');
+    }    
+?>
+</select>
+
+<input type="submit" value="delete">
+</form>
+
+<?php
+    if(isset ($_POST["burger"])) {
+        $burger = $_POST["burger"];
+        
+        echo ("'$burger' has been deleted!");
+    }
+?>
+\end{lstlisting}
+This file is used to delete an existing burger from the database.
+
+\subsection{Get burgers that are served by a given waiter to a specific table}
+
+\begin{lstlisting}[caption=getBurgers.php]
+<form action="getBurgers.php" method="POST">
+
+<?php
+    $waiters = mysql_query("select * from `Waiter`") or die(mysql_error());
+    $tables  = mysql_query("SELECT * from `Table`")  or die(mysql_error());
+?>
+
+<select name="waiter">
+    <?php
+        while($waiter = mysql_fetch_array($waiters)) {
+            if ($_POST["waiter"] == $waiter["WID"]) {
+                echo '<option selected = yes value="'.$waiter["WID"].'">'.
+                    $waiter["WLastName"]." ".$waiter["WFirstName"].
+                    '</option>';
+            } else {
+                echo '<option value="'.$waiter["WID"].'">' .
+                    $waiter["WLastName"]." ".$waiter["WFirstName"].
+                    '</option>';
+            }
+        }
+    ?>
+    
+</select>
+<select name="table">
+    <?php
+        while($table = mysql_fetch_array($tables)) {
+            if ($_POST["table"] == $table["TID"]) {
+                echo '<option selected = yes value="'.$table["TID"].'">'.
+                	"Table Number: ".$table["TID"].'</option>';
+            } else {
+                echo '<option value="'.$table["TID"].'">'."Table Number: ".
+                	$table["TID"].'</option>'; 
+            }
+        }
+    ?>
+
+
+<?php
+    
+    if (isset ($_POST["waiter"]) && isset ($_POST["table"])) {
+        
+        $wid    = $_POST["waiter"];
+        $tid    = $_POST["table"];
+        $waiter = mysql_query("select * from Waiter where WID = $wid");
+        $name   = mysql_fetch_object($waiter); 
+        
+        $result = mysql_query("select BName from Burger where BID in 
+                                  (select BID from SalesSlip where 
+                                  	WID = $wid and TID = $tid)");
+        
+        while ($burger = mysql_fetch_array($result)) {
+            echo $burger["BName"] . " at table " . $tid . " by " 
+                    . $name->WFirstName . " " . $name->WLastName;
+        } 
+    }
+?>
+\end{lstlisting}
+Gets all burgers that are served by a given waiter to a specific table.
+
+\subsection{Get all burgers that have been served by a a specific waiter}
+
+\begin{lstlisting}[caption=waiterStatistic.php]
+<form action="waiterStatistic.php" method="POST">
+  <table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="125">Waiter:</td>
+    <td width="475"><?php        
+    $waiters = mysql_query("select * from Waiter") or die (mysql_error());
+?>
+    
+<select name="waiter">            
+    <?php
+        while ($waiter = mysql_fetch_array($waiters)) {
+            if ($_POST["waiter"] == $waiter["WID"]) {
+                echo '<option selected = yes value = "'.$waiter["WID"].'">'. 
+                      $waiter["WLastName"]." ".$waiter["WFirstName"].
+                      '</option>';
+            } else {
+                echo '<option value = "'.$waiter["WID"].'"> '. 
+                      $waiter["WLastName"]." ".$waiter["WFirstName"].
+                      '</option>';
+            }
+        }
+    ?>
+</select>
+</td>
+  </tr>
+  <tr>
+    <td>Smoker Table:</td>
+    <td>
+    
+    
+    <?php
+   	if (isset ($_POST["smokertable"]))
+        		echo '<input type="checkbox" name="smokertable" checked>';
+    	else
+        		echo '<input type="checkbox" name="smokertable">';
+    ?>
+    </td>
+  </tr>
+</table>
+
+</form>
+<?php
+    if (isset ($_POST["waiter"])) {
+        $wid = $_POST["waiter"];
+        
+        if (isset($_POST["smokertable"])) 
+            $smoker = 1;
+        else
+            $smoker = 0;
+            
+        $result = 
+        		mysql_query("SELECT * FROM Burger WHERE BID IN 
+                   			(SELECT BID FROM `SalesSlip` WHERE WID = $wid 
+							AND TID IN (SELECT TID FROM  `Table` WHERE 
+							TSmoker = $smoker AND TID IN 
+                           	(SELECT TID FROM `SalesSlip` WHERE WID = $wid))
+							)");
+                   
+        while ($burger = mysql_fetch_array($result)) {
+            echo $burger["BName"]; ?><br><?php
+        }        
+    }
+?>
+\end{lstlisting}
+You can choose a waiter to see the statistic of the Burgers that have been served by him.
+
 
 \end{document}
